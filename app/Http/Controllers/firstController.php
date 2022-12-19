@@ -26,13 +26,25 @@ class firstController extends Controller
             'hobbies' => 'required'
         ]);
 
-        name::create([
-            'name' => $request->name,
-            'mobile_number' => $request->mobile,
-            'gender' => $request->gender,
-            'place' => $request->country,
-            'likes' => json_encode($request->hobbies)
-        ]);
+        $name = new name;
+        $name->name = $request->name;
+        $name->mobile_number = $request->mobile;
+        $name->gender = $request->gender;
+        if ($request->hasFile('mage')) {
+            $request->validate([
+                'mage' => 'required|image|mimes:png,jpg,jpeg,gif|max:512'
+            ]);
+
+            $image = $request->file('mage');
+            $date = date('d-m-y') . time() . '.' . $image->extension();
+
+            $path = public_path('/images');
+            $image->move($path, $date);
+            $name->image_url = "/images/" . $date;
+        }
+        $name->place = $request->country;
+        $name->likes = json_encode($request->hobbies);
+        $name->save();
 
         return redirect('/')->with('message', 'Successfully uploaded!');
     }
@@ -55,13 +67,26 @@ class firstController extends Controller
         $got->name = $request->name;
         $got->mobile_number = $request->mobile;
         $got->gender = $request->gender;
+        if ($request->hasFile('mage')) {
+            $request->validate([
+                'mage' => 'required|image|mimes:png,jpg,jpeg,gif|max:512'
+            ]);
+
+            $image = $request->file('mage');
+            $date = date('d-m-y') . time() . '.' . $image->extension();
+
+            $path = public_path('/images');
+            $image->move($path, $date);
+            $got->image_url = "/images/" . $date;
+        }
         $got->place = $request->country;
         $got->likes = json_encode($request->hobbies);
         $got->save();
 
         return redirect('/')->with('message', 'Successfully updated!');
     }
-    public function delete($ids){
+    public function delete($ids)
+    {
         $delete = name::find($ids);
         $delete->delete();
         return back()->with('show', 'Data has been deleted!');

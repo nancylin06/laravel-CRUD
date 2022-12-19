@@ -35,7 +35,7 @@
                         Gender
                     </span>
                     <label>Male
-                        <input id="draft" class="peer/draft" type="radio" name="gender" value="male"/>
+                        <input id="draft" class="peer/draft" type="radio" name="gender" value="male" />
                     </label>
                     <label>Female
                         <input id="published" class="peer/published" type="radio" name="gender" value="female" />
@@ -53,6 +53,13 @@
                         <option value="France">France</option>
                         <option value="Germany">Germany</option>
                     </select>
+                </div>
+                <div>
+                    <span class="block text-sm font-medium">
+                        Choose image
+                    </span>
+                    <input type="file" name="mage"
+                        class="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:py-1 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-white hover:file:bg-slate-50" />
                 </div>
                 <div>
                     <span class="block text-sm font-medium">

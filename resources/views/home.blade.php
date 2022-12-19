@@ -33,6 +33,7 @@
                         <th class="border-2 border-slate-300">Name</th>
                         <th class="border-2 border-slate-300">Number</th>
                         <th class="border-2 border-slate-300">Gender</th>
+                        <th class="border-2 border-slate-300">Image</th>
                         <th class="border-2 border-slate-300">Likes</th>
                         <th class="border-2 border-slate-300">Place</th>
                         <th class="border-2 border-slate-300">Edit</th>
@@ -45,6 +46,11 @@
                             <td class="border-2 p-2 border-slate-300">{{ $values->name }}</td>
                             <td class="border-2 p-2 border-slate-300">{{ $values->mobile_number }}</td>
                             <td class="border-2 p-2 border-slate-300">{{ $values->gender }}</td>
+                            <td class="border-2 p-2 border-slate-300">
+                                @if ($values->image_url)
+                                    <img src=" {{ asset($values->image_url) }}" class="w-14 h-14 mx-auto rounded" alt="" />
+                                @endif
+                            </td>
                             <td class="border-2 p-2 border-slate-300">
                                 @php
                                     $checks = json_decode($values->likes);
