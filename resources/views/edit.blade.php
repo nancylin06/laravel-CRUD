@@ -51,10 +51,10 @@
                         class="bg-white border border-slate-300 rounded-md block w-full px-2 py-1 mt-1 text-sm outline-none"
                         name="country">
                         <option value="">Choose a country</option>
-                        <option value="America">United States</option>
-                        <option value="Canada">Canada</option>
-                        <option value="France">France</option>
-                        <option value="Germany">Germany</option>
+                        <option value="America"  {{$input->place == "America" ?  "selected" : ""}}>United States</option>
+                        <option value="Canada" {{$input->place == "Canada" ?  "selected" : ""}}>Canada</option>
+                        <option value="France" {{$input->place == "France" ?  "selected" : ""}}>France</option>
+                        <option value="Germany" {{$input->place == "Germany" ?  "selected" : ""}}>Germany</option>
                     </select>
                 </div>
                 <div>
@@ -65,6 +65,12 @@
                         class="my-1 block w-full text-sm text-slate-500 file:mr-4 file:py-1 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-white hover:file:bg-slate-50" />
                     @if ($input->image_url)
                         <img src=" {{ asset($input->image_url) }}" class="w-10 h-10 rounded-full" alt="" />
+                    @else
+                        <img src="{{ asset('images/images.jpg') }}" class="w-14 h-14 rounded-full"
+                            alt="" />
+                    @endif
+                    @if($input->image_url !== null)
+                    <button type="submit" class="p-1 bg-red-100 text-xs text-red-900 font-medium mt-1 rounded" name="remove_mage">Remove image</button>
                     @endif
                 </div>
                 @php

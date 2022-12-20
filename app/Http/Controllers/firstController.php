@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\name;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class firstController extends Controller
 {
@@ -77,8 +78,25 @@ class firstController extends Controller
 
             $path = public_path('/images');
             $image->move($path, $date);
+
+            //deleting old image after update in laravel
+            $forOld =  public_path($got->image_url);
+            if (File::exists($forOld)) {
+                if($got->image_url !== null){
+                    unlink($forOld);
+                }
+            }
+
+            //uploading image
             $got->image_url = "/images/" . $date;
         }
+
+        //to remove profile image
+        if ($request->has('remove_mage')) {
+            $got->image_url = null;
+            $got->save();
+        }
+
         $got->place = $request->country;
         $got->likes = json_encode($request->hobbies);
         $got->save();

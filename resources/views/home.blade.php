@@ -49,6 +49,8 @@
                             <td class="border-2 p-2 border-slate-300">
                                 @if ($values->image_url)
                                     <img src=" {{ asset($values->image_url) }}" class="w-14 h-14 mx-auto rounded" alt="" />
+                                @else
+                                <img src="{{asset("images/images.jpg")}}" class="w-14 h-14 mx-auto rounded-full" alt="" />
                                 @endif
                             </td>
                             <td class="border-2 p-2 border-slate-300">
